@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: baro
+  profiles:
+    active: local
+  datasource:
+    url: jdbc:postgresql://localhost:5432/users
+    driver-class-name: org.postgresql.Driver
+    username: test
+    password: 1234
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 10
+
+jwt:
+  secret: ${JWT_SECRET_KEY:yourVerySecretKeyThatIsLongEnoughAndRandom}
+  expiration-time: 86400000
