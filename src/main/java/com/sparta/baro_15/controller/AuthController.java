@@ -1,6 +1,6 @@
 package com.sparta.baro_15.controller;
 
-import com.sparta.baro_15.service.UserService;
+import com.sparta.baro_15.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("")
-public class UserController {
+public class AuthController {
 
-    private final UserService userService;
+    private final AuthService userService;
 
     //회원가입
     @PostMapping()
