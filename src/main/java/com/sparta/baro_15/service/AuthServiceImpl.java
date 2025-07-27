@@ -1,8 +1,10 @@
 package com.sparta.baro_15.service;
 
+import com.sparta.baro_15.config.JwtUtil;
 import com.sparta.baro_15.domain.UserEntity;
 import com.sparta.baro_15.domain.UserRole;
-import com.sparta.baro_15.dto.reqSignupDto;
+import com.sparta.baro_15.dto.ReqSigninDto;
+import com.sparta.baro_15.dto.ReqSignupDto;
 import com.sparta.baro_15.exception.CustomException;
 import com.sparta.baro_15.exception.ExceptionCode;
 import com.sparta.baro_15.repository.UserRepository;
@@ -15,13 +17,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
     private final String ADMIN_TOKEN = "AAABnvxRVVZXgUn stretchy";
 
     @Override
-    public void signUp(reqSignupDto dto) {
+    public void signUp(ReqSignupDto dto) {
 
         String username = dto.getUsername();
         String password = dto.getPassword();
@@ -58,5 +62,22 @@ public class AuthServiceImpl implements AuthService {
                 .build();
 
         userRepository.save(user);
+    }
+
+    @Override
+    public String signIn(ReqSigninDto reqDto) {
+        //1. 사용자 조회
+        UserEntity user = userRepository.findByUsername(reqDto.getUsername())
+                .orElseThrow(() -> new CustomException(ExceptionCode.USER_NOT_FOUND));
+
+        //2. 비밀번호 일치 확인
+        if(!passwordEncoder.matches(reqDto.getPassword(), user.getPassword())){
+            throw new CustomException(ExceptionCode.INVALID_PASSWORD);
+        }
+
+        //3. jwt 토큰 확인하고 로그인 성공 후 반환
+        String accessToken = jwtUtil.generateAccessToken(user.getUsername(), user.getRole());
+
+        return accessToken;
     }
 }

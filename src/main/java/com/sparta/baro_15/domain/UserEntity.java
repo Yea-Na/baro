@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Builder;
+import lombok.Getter;
 
+@Getter
 @Entity
 @Table(name = "p_user")
 public class UserEntity {
@@ -35,4 +37,5 @@ public class UserEntity {
         this.email = email;
         this.role = role;
     }
+
 }
