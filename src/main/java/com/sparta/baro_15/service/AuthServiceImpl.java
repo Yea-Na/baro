@@ -3,6 +3,8 @@ package com.sparta.baro_15.service;
 import com.sparta.baro_15.domain.UserEntity;
 import com.sparta.baro_15.domain.UserRole;
 import com.sparta.baro_15.dto.reqSignupDto;
+import com.sparta.baro_15.exception.CustomException;
+import com.sparta.baro_15.exception.ExceptionCode;
 import com.sparta.baro_15.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,12 +31,12 @@ public class AuthServiceImpl implements AuthService {
 
         // 1. 사용자 이름 중복 확인
         if (userRepository.findByUsername(username).isPresent()) {
-            throw new IllegalArgumentException("중복된 사용자 이름이 존재합니다.");
+            throw new CustomException(ExceptionCode.USER_ALREADY_EXISTS);
         }
 
         // 2. 이메일 중복 확인
         if (userRepository.findByEmail(email).isPresent()) {
-            throw new IllegalArgumentException("중복된 이메일이 존재합니다.");
+            throw new CustomException(ExceptionCode.USER_ALREADY_EXISTS);
         }
 
         // 3. 비밀번호 암호화
@@ -43,7 +45,7 @@ public class AuthServiceImpl implements AuthService {
         // 4. 사용자 권한 설정 및 관리자 토큰 유효성 검사
         if (role == UserRole.ADMIN) {
             if (adminToken == null || !ADMIN_TOKEN.equals(adminToken)) {
-                throw new IllegalArgumentException("관리자 권한을 부여할 수 없습니다. 유효하지 않은 관리자 토큰입니다.");
+                throw new CustomException(ExceptionCode.INVALID_ADMIN_TOKEN);
             }
         }
 
