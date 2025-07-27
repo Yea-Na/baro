@@ -1,0 +1,11 @@
+### 회원가입
+POST http://localhost:8080/v1/api/auth/signup
+Content-Type: application/json
+
+{
+  "password": "1234",
+  "username": "test",
+  "email": "tdst@test",
+  "role": "USER",
+  "adminToken": ""
+}
