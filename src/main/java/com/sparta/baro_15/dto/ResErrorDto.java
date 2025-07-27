@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class ErrorResDto {
+public class ResErrorDto {
 
     private ErrorDetail error;
 

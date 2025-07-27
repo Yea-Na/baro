@@ -8,7 +8,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class reqSignupDto {
+public class ReqSignupDto {
 
     @NotBlank(message = "비밀번호는 필수입니다")
     private String password;
@@ -23,7 +23,7 @@ public class reqSignupDto {
     private UserRole role;
     private String adminToken;
 
-    public reqSignupDto(String password, String username, String email, UserRole role,
+    public ReqSignupDto(String password, String username, String email, UserRole role,
             String adminToken) {
         this.password = password;
         this.username = username;
