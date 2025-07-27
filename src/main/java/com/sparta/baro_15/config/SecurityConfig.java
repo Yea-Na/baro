@@ -36,7 +36,13 @@ public class SecurityConfig {
 
                 //요청 URL별로 접근 권한을 설정
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/v1/api/auth/**") // 특정 경로를 지정
+                        .requestMatchers(
+                                "/swagger-ui.html",
+                                "/swagger-ui/**",            // 스웨거 UI에 접근하는 기본 경로
+                                "/v3/api-docs/**",           // OpenAPI 3.0 문서 정의 경로
+                                "/swagger-resources/**",     // 스웨거 리소스
+                                "/webjars/**",              // 스웨거 UI에 필요한 웹 자원
+                                "/v1/api/auth/**") //로그인/회원가입
                         .permitAll() //인증 없이도 모두 허용
                         .anyRequest().authenticated() //이외의 요청은 인증된 사용자만 접근 가능
                 )

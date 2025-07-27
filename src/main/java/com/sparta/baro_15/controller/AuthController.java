@@ -4,6 +4,7 @@ import com.sparta.baro_15.config.JwtUtil;
 import com.sparta.baro_15.dto.ReqSigninDto;
 import com.sparta.baro_15.dto.ReqSignupDto;
 import com.sparta.baro_15.service.AuthService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "인증 API", description = "회원가입 및 로그인 관련 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1/api/auth")
