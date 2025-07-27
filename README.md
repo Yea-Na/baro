@@ -3,12 +3,13 @@
 
 **데이터베이스 설정**
    Docker Compose를 사용하여 PostgreSQL 컨테이너를 실행
-  * **데이터베이스 접속 정보**:
-        * 호스트: `localhost`
-        * 포트: `5432`
-        * 사용자명: `test`
-        * 비밀번호: `1234`
-        * 데이터베이스 이름: `users`
+   * **데이터베이스 접속 정보**:
+    * 호스트: localhost
+    * 포트: 5432
+    * 사용자명: test
+    * 비밀번호: 1234
+    * 데이터베이스 이름: users
+
 ---
 
 ### 💡 API 문서 및 테스트 (API Documentation & Testing)
